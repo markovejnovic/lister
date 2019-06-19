@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MHeader from './MHeader';
+import MFooter from './MFooter';
 import Index from './Index';
-import LandingListingsView from './LandingListingsView'
-import { Button, Layout, Input, Typography } from 'antd';
+import { Layout } from 'antd';
 import { Route } from 'react-router-dom';
 import ListingView from './ListingView';
 import ListingListView from './ListingListView';
 import CreateListingView from './CreateListingView';
+import LoginView from './LoginView';
 
 const {
   Content
 } = Layout;
-
-const { Title } = Typography;
 
 class App extends Component {
   render() {
@@ -27,7 +25,9 @@ class App extends Component {
             <Route exact path='/listings' component={ListingListView} />
             <Route exact path='/listings/create' component={CreateListingView} />
             <Route exact path='/listings/:id(\d+)' component={ListingView} />
+            <Route exact path='/login' component={LoginView} />
           </Content>
+        <MFooter />
         </Layout>
       </Layout>
     );

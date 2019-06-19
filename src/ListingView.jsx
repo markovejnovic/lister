@@ -9,7 +9,6 @@ const { Title } = Typography;
 
 class ListingView extends Component {
   state = {
-    loading: true,
     title: null,
     descriptionBrief: null,
     descriptionLong: null,
@@ -24,7 +23,6 @@ class ListingView extends Component {
       .then(
         response =>
           this.setState({
-          loading: false,
           title: response.data.title,
           descriptionBrief: response.data.descriptionBrief,
           descriptionLong: response.data.descriptionLong,
@@ -38,7 +36,7 @@ class ListingView extends Component {
   }
 
   render() {
-    const { loading, title, descriptionBrief, descriptionLong, price, views, date, img} = this.state;
+    const { title, descriptionBrief, descriptionLong, price, views, date, img} = this.state;
 
     return (
       <div>

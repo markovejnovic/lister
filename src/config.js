@@ -1,3 +1,3 @@
 export const config = {
-	apiRoot: 'http://10.11.185.9:5000/'
+	apiRoot: 'http://192.168.0.105:5000/'
 }

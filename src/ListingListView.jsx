@@ -1,62 +1,84 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Col, Row, Icon, Typography, Carousel, Button, Table } from 'antd';
+import { Col, Row, Table } from 'antd';
 import axios from 'axios';
-import TimeAgo from 'react-timeago'
 import { config } from './config';
 import { Link } from 'react-router-dom';
-
-const { Title } = Typography;
+const qs = require('query-string');
 
 const columns = [{
-  title: '',
+  title: 'Image',
   dataIndex: 'image',
   key: 'image',
-  render: text => <img className="listingListTableImage" src={text} />
+  render: text => <img alt="" className="listingListTableImage" src={text} />
 }, {
   title: 'Title',
   dataIndex: 'title',
   key: 'title',
-  render: (text, i) => <Link to={'/listings/' + i.key}><b>{text}</b></Link>
+  render: (text, i) => <Link to={'/listings/' + i.key}><b>{text}</b></Link>,
+  sorter: (a, b) => { return a.title.localeCompare(b.title) }
 }, {
   title: 'Category',
-  dataIndex: 'Category',
-  key: 'category'
+  dataIndex: 'category',
+  key: 'category',
+  sorter: (a, b) => { return a.title.localeCompare(b.title) }
 }, {
   title: 'Price',
   dataIndex: 'price',
-  key: 'price'
+  key: 'price',
+  sorter: (a, b) => a.price - b.price,
 }];
 
 class ListingListView extends Component {
   state = {
-    loading: true,
-    dataSource: null
+    dataSource: []
+  }
+
+  performApiCall(props) {
+    let query = qs.parse(props.location.search).q;
+    let t = this;
+    let url = "";
+    if (!query) {
+      url = config.apiRoot + 'listings';
+    } else {
+      url = config.apiRoot + 'listings?q=' + query;
+    }
+    axios.get(url).then(response => {
+        let data = [];
+        if (response.data.length === 0) {
+          t.setState({
+            dataSource: []
+          });
+        } else {
+          response.data.forEach(function (e) {
+            axios.get(config.apiRoot + 'categories/' + e.categoryId).then(response2 => {
+              data.push({
+                key: e.id,
+                image: e.images[0],
+                title: e.title,
+                category: response2.data.title,
+                price: e.price
+              });
+
+              t.setState({
+                dataSource: data
+              });
+            });
+          });
+        }
+      })
   }
 
   componentDidMount() {
-    let data = []
-    axios.get(config.apiRoot + 'listings')
-      .then(
-        response => {
-          response.data.forEach(function (e) {
-            data.push({
-              key: e.id,
-              image: e.images[0],
-              title: e.title,
-              category: e.categoryId,
-              price: e.price
-            })
-          })
-          this.setState({
-            loading: false,
-            dataSource: data
-          })
-        })
+    this.performApiCall(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.performApiCall(nextProps);
   }
 
   render() {
-    const { loading, dataSource } = this.state;
+    const { dataSource } = this.state;
 
     return (
       <div>

@@ -38,17 +38,17 @@ class ListingCard extends Component {
     return (
       <Col className="listingCardContainer" xl={6} lg={8} md={8} sm={12} xs={24}>
         <Card className="listingCard" loading={loading}
-          cover={<img alt={title} src={img} />}
+          cover={<img className='listingCardImg' alt={title} src={img} />}
           actions={[
             <Icon type="wechat" />, 
-            <Link to={'/listings/' + id}><Icon type="eye" /></Link>, 
+            <Link to={'/listings/' + id}><Icon type="user" /></Link>, 
             <div>
               <b>{price}</b>
             </div>
           ]} >
           <Skeleton loading={loading} active>
             <Meta
-              title={title}
+              title={<Link to={'/listings/' + id}>{title}</Link>}
               description={description}
             />
           </Skeleton>

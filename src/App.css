@@ -1,12 +1,28 @@
+body {
+  background: rgb(220, 222, 225);
+}
+
 h1 {
   text-align: center;
 }
 
-.mHeader {
+.paddedContent {
   padding: 16px;
   padding-top: 8px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #1DA57A !important;
+  padding-bottom: 8px;
+}
+
+.mFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(220, 222, 225);
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}
+
+.mFooter > div > h2 {
+  margin: 0 !important;
 }
 
 .headerChild {
@@ -31,10 +47,16 @@ h1 {
 
 .listingCard {
   border: 2px solid #1DA57A !important;
+  box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.5);
 }
 
 .listingCardContainer {
   margin-top: 12px;
+}
+
+.listingCardImg {
+  height: 160px;
+  object-fit: cover;
 }
 
 .listingViewInner {
@@ -51,4 +73,18 @@ h1 {
 
 .react-html5-camera-photo > img, .react-html5-camera-photo > video {
   width: 90% !important;
+}
+
+.mainTitle {
+  padding-bottom: 0.1em;
+  margin-bottom: 0.1em !important;
+  border-bottom: 2px solid #1DA57A !important;
+  /*box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.5);*/
+}
+
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ListingCard from './ListingCard';
-import { Col, Row, Empty, Input, Button } from 'antd';
+import { Col, Row, Input, Button } from 'antd';
 import axios from 'axios';
 import { config } from './config';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
@@ -22,7 +21,7 @@ class CreateListingView extends Component {
 
   onTakePhoto(dataUri) {
     this.setState({
-      imageElement: <img style={{width: '100%'}} src={dataUri} />
+      imageElement: <img alt="TODO" style={{width: '100%'}} src={dataUri} />
     })
   }
 
@@ -36,8 +35,8 @@ class CreateListingView extends Component {
       categoryId: 1
     }, {
       headers: {
-        Content-Type: 'application/json',
-        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTU2Njk0NDQsIm5iZiI6MTU1NTY2OTQ0NCwianRpIjoiZWI0ODNkOWItNmVmMi00YmYzLWE0ZGMtNTZmYWQ0Y2MwMjFjIiwiZXhwIjoxNTU1NjcwMzQ0LCJpZGVudGl0eSI6Im1hcmtvdmVqbm92aWMiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.qwfTvPf_A91nYFfyhFl0owchrKzilr3Z2W5uNW364do'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTU2Njk0NDQsIm5iZiI6MTU1NTY2OTQ0NCwianRpIjoiZWI0ODNkOWItNmVmMi00YmYzLWE0ZGMtNTZmYWQ0Y2MwMjFjIiwiZXhwIjoxNTU1NjcwMzQ0LCJpZGVudGl0eSI6Im1hcmtvdmVqbm92aWMiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.qwfTvPf_A91nYFfyhFl0owchrKzilr3Z2W5uNW364do'
       }
     })
   }
